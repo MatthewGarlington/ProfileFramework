@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Post: Identifiable {
-    var id = UUID().uuidString
-    var name: String
-    var post: String
-    var profilePic: String
+public struct Post: Identifiable {
+    public var id = UUID().uuidString
+    public var name: String
+    public var post: String
+    public var profilePic: String
 }

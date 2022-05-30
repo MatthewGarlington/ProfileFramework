@@ -7,25 +7,22 @@
 
 
 import SwiftUI
+import ComposableArchitecture
 
 struct StackCardView: View {
     @EnvironmentObject var homeData: StackCardViewModel
     var post: Post
-    
-    // Gesture Properties...
+    // Gesture Properties... fsdafs
     @State var offset: CGFloat = 0
     @State var heightOffset: CGFloat = 0
     @GestureState var isDragging: Bool = false
-    @Binding var longPressed: Bool
     @State var endSwipe: Bool = false
-    @Binding var show: Bool
-    var showComment: Bool
-    
     
     public let store: Store<ProfileState, ProfileAction>
 
-    public init(store: Store<ProfileState, ProfileAction>c) {
+    public init(store: Store<ProfileState, ProfileAction>, post: Post) {
         self.store = store
+        self.post = post
     }
     
     var body: some View {
@@ -41,8 +38,8 @@ struct StackCardView: View {
             
             ZStack{
                 
-                PostCard(name: post.name, description: post.post, longPressed: $longPressed, show: $show, showComment: showComment)
-                    .scaleEffect(longPressed ? 0.85 : 1)
+                PostCard(store: store)
+                    .scaleEffect(viewStore.state.longPress ? 0.85 : 1)
                 // Reducing width too...
                     .frame(width: size.width - topOffset, height: size.height)
                     .offset(y: -topOffset)
@@ -197,8 +194,13 @@ struct StackCardView: View {
 }
 
 struct StackCardView_Previews: PreviewProvider {
+    static let mockStore = Store(
+        initialState: ProfileState(),
+        reducer:  profileReducer,
+        environment: .cancelRequest
+    )
     static var previews: some View {
-        StackCardView(post: Post(name: "Natalia", post: "Vadalia NYC let see where this is going I am going to see where this is going", profilePic: "User1"), longPressed: .constant(false), show: .constant(false), showComment: false)
+        StackCardView(store: mockStore, post: Post(id: "", name: "", post: "", profilePic: ""))
             .environmentObject(StackCardViewModel())
     }
 }

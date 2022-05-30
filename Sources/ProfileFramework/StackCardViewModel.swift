@@ -9,7 +9,7 @@ import Foundation
 
 
 
-class StackCardViewModel: ObservableObject {
+public class StackCardViewModel: ObservableObject {
     
     // Store All the fetched Users here...
     // Since we're building UI so using sample Users here....
@@ -17,7 +17,7 @@ class StackCardViewModel: ObservableObject {
     
     @Published var displaying_posts: [Post]?
     
-    init(){
+    public init(){
         
         // fetching users...
         fetched_posts = [
