@@ -8,7 +8,6 @@
 import Foundation
 
 
-
 public class StackCardViewModel: ObservableObject {
     
     // Store All the fetched Users here...
@@ -20,15 +19,15 @@ public class StackCardViewModel: ObservableObject {
     public init(){
         
         // fetching users...
-        fetched_posts = [
-        
-            Post(name: "Natalia", post: "Vadalia NYC", profilePic: "User1"),
-            Post(name: "Elisa", post: "Central Park NYC", profilePic: "User2"),
-            Post(name: "Jasmine", post: "Metropolitan Museum NYC", profilePic: "User3"),
-            Post(name: "Zahra", post: "Liberty NYC", profilePic: "User4"),
-            Post(name: "Angelina", post: "Empier State NYC", profilePic: "User5"),
-            Post(name: "Brittany", post: "Time Square NYC", profilePic: "User6")
-        ]
+//        fetched_posts = [
+//        
+//            Post(name: "Natalia", post: "Vadalia NYC", profilePic: "User1"),
+//            Post(name: "Elisa", post: "Central Park NYC", profilePic: "User2"),
+//            Post(name: "Jasmine", post: "Metropolitan Museum NYC", profilePic: "User3"),
+//            Post(name: "Zahra", post: "Liberty NYC", profilePic: "User4"),
+//            Post(name: "Angelina", post: "Empier State NYC", profilePic: "User5"),
+//            Post(name: "Brittany", post: "Time Square NYC", profilePic: "User6")
+//        ]
         
         // storing it in displaying users..
         // what is displaying users?

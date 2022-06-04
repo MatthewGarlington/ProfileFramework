@@ -20,7 +20,7 @@ public struct ProfileView: View {
                                 Spacer()
                             }
                             Spacer()
-                            ProfileInfoBarView()
+                            ProfileInfoBar(store: store)
                             ProfileDescription()
                                 .padding()
                             VStack(spacing: 20) {
@@ -28,19 +28,19 @@ public struct ProfileView: View {
                             }
                             
                             ZStack {
-                                StackCardView(store: store, post: Post(name: "", post: "", profilePic: ""))
+                                StackCardView(store: store, post: Post())
                                     .frame(width: 400, height: 375)
                                     .environmentObject(StackCardViewModel())
                                     .padding()
-                                StackCardView(store: store, post: Post(name: "", post: "", profilePic: ""))
+                                StackCardView(store: store, post: Post())
                                     .frame(width: 400, height: 375)
                                     .environmentObject(StackCardViewModel())
                                     .padding()
-                                StackCardView(store: store, post: Post(name: "", post: "", profilePic: ""))
+                                StackCardView(store: store, post: Post())
                                     .frame(width: 400, height: 375)
                                     .environmentObject(StackCardViewModel())
                                     .padding()
-                                StackCardView(store: store, post: Post(name: "", post: "", profilePic: ""))
+                                StackCardView(store: store, post: Post())
                                     .frame(width: 400, height: 375)
                                     .environmentObject(StackCardViewModel())
                                     .padding()
@@ -62,7 +62,7 @@ public struct ProfileView: View {
                     }
             }
         }
-        .ignoresSafeArea()
+        .ignoresSafeArea(edges: .bottom)
         }
     }
 }

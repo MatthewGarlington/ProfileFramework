@@ -175,21 +175,18 @@ struct StackCardView: View {
     }
     
     func leftSwipe(){
-        // DO ACTIONS HERE...
-        print("Left Swiped")
+       
     }
     
     func rightSwipe(){
-        // DO ACTIONS HERE...
-        print("Right Swiped")
+        
     }
     func upSwipe() {
-        // Do actions for Swiping up
-        print("Swipe Up")
+        
     }
     
     func downSwipe() {
-        print("Down Swipe")
+        
     }
 }
 
@@ -200,7 +197,7 @@ struct StackCardView_Previews: PreviewProvider {
         environment: .cancelRequest
     )
     static var previews: some View {
-        StackCardView(store: mockStore, post: Post(id: "", name: "", post: "", profilePic: ""))
+        StackCardView(store: mockStore, post: Post())
             .environmentObject(StackCardViewModel())
     }
 }

@@ -22,10 +22,10 @@ struct PostCard: View {
                 RoundedRectangle(cornerRadius: 16.0, style: .continuous)
                     .fill(Material.ultraThinMaterial)
                     .frame(height: 350)
-                // .shadow(color: .red.opacity(0.2), radius: 15, x: 5, y: 5)
+                    .shadow(color: .white.opacity(0.2), radius: 10, x: 10, y: 10)
                     .padding()
                 RoundedRectangle(cornerRadius: 16.0, style: .continuous)
-                    .stroke(Color.green.opacity(0.4), lineWidth: 3)
+                    .stroke(Color.white.opacity(0.4), lineWidth: 3)
                     .frame(height: 350)
                     .padding()
                 VStack {
@@ -100,6 +100,7 @@ struct PostCard_Previews: PreviewProvider {
     )
     static var previews: some View {
         PostCard(store: mockStore)
+            .preferredColorScheme(.dark)
     }
 }
 

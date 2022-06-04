@@ -16,6 +16,8 @@ public struct ProfileState: Equatable {
     public var showComment: Bool
     public var activate: Bool
     public var showPostEdit: Bool
+    public var isLikesPressedAnimation: Bool
+    public var isPostsPressedAnimation: Bool
     
     public init(
         show: Bool = false,
@@ -24,7 +26,9 @@ public struct ProfileState: Equatable {
         description: String = "This is a Post to the app echo written once in TCA so that all future posts can be easy to integerate!",
         showComment: Bool = false,
         activate: Bool = false,
-        showPostEdit: Bool = false
+        showPostEdit: Bool = false,
+        isLikesPressedAnimation: Bool = false,
+        isPostsPressedAnimation: Bool = false
     ) {
         self.show = show
         self.longPress = longPress
@@ -33,6 +37,8 @@ public struct ProfileState: Equatable {
         self.showComment = showComment
         self.activate = activate
         self.showPostEdit = showPostEdit
+        self.isLikesPressedAnimation = isLikesPressedAnimation
+        self.isPostsPressedAnimation = isPostsPressedAnimation
     }
 }
 
@@ -41,6 +47,8 @@ public enum ProfileAction: Equatable {
     case longPress
     case deactivate
     case hidePostEdit
+    case likeIsPressed
+    case postIsPressed
 }
 
 public typealias ProfileEnviroment = NetworkRequestAction<Nothing, NetworkError>
@@ -62,6 +70,12 @@ public let profileReducer = Reducer<ProfileState, ProfileAction, ProfileEnvirome
         return .none
     case .hidePostEdit:
         state.showPostEdit = false 
+        return .none
+    case .likeIsPressed:
+        state.isLikesPressedAnimation.toggle()
+        return .none
+    case .postIsPressed:
+        state.isPostsPressedAnimation.toggle()
         return .none
     }
 }
