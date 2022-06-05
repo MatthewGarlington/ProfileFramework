@@ -18,6 +18,12 @@ public struct ProfileState: Equatable {
     public var showPostEdit: Bool
     public var isLikesPressedAnimation: Bool
     public var isPostsPressedAnimation: Bool
+    public var postText: String
+    public var cancelPressed: Bool
+    public var confirmedPressed: Bool
+    public var isValidated: Bool {
+        return postText.isEmpty == false
+    }
     
     public init(
         show: Bool = false,
@@ -28,7 +34,10 @@ public struct ProfileState: Equatable {
         activate: Bool = false,
         showPostEdit: Bool = false,
         isLikesPressedAnimation: Bool = false,
-        isPostsPressedAnimation: Bool = false
+        isPostsPressedAnimation: Bool = false,
+        postText: String = "",
+        cancelPressed: Bool = false,
+        confirmedPressed: Bool = false
     ) {
         self.show = show
         self.longPress = longPress
@@ -39,6 +48,9 @@ public struct ProfileState: Equatable {
         self.showPostEdit = showPostEdit
         self.isLikesPressedAnimation = isLikesPressedAnimation
         self.isPostsPressedAnimation = isPostsPressedAnimation
+        self.postText = postText
+        self.cancelPressed = cancelPressed
+        self.confirmedPressed = confirmedPressed
     }
 }
 
@@ -49,6 +61,9 @@ public enum ProfileAction: Equatable {
     case hidePostEdit
     case likeIsPressed
     case postIsPressed
+    case postTextChanged
+    case cancelPressed
+    case confirmedPressed
 }
 
 public typealias ProfileEnviroment = NetworkRequestAction<Nothing, NetworkError>
@@ -76,6 +91,14 @@ public let profileReducer = Reducer<ProfileState, ProfileAction, ProfileEnvirome
         return .none
     case .postIsPressed:
         state.isPostsPressedAnimation.toggle()
+        return .none
+    case .postTextChanged:
+        return .none
+    case .cancelPressed:
+        state.cancelPressed = true 
+        return .none
+    case .confirmedPressed:
+        state.confirmedPressed = true 
         return .none
     }
 }

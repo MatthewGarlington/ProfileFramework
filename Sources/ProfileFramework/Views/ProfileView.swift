@@ -3,6 +3,7 @@ import ComposableArchitecture
 
 public struct ProfileView: View {
     @EnvironmentObject var stackCardViewModel: StackCardViewModel
+    @EnvironmentObject var firestoreManager: FirestoreManager
     public let store: Store<ProfileState, ProfileAction>
 
     public init(store: Store<ProfileState, ProfileAction>) {
@@ -77,6 +78,7 @@ public struct ProfileView_Previews: PreviewProvider {
         ProfileView(store: mockStore)
             .preferredColorScheme(.dark)
             .environmentObject(StackCardViewModel())
+            .environmentObject(FirestoreManager())
     }
 }
 
