@@ -17,6 +17,7 @@ public struct CreatePostView: View {
     }
     
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var firestoreManager: FirestoreManager
     public var body: some View {
         WithViewStore(self.store) { (viewStore: ViewStore<ProfileState, ProfileAction>) in
             ZStack(alignment: .top) {
@@ -28,6 +29,7 @@ public struct CreatePostView: View {
                     Text("Create Post")
                         .font(.system(size: 17.0, weight: .semibold, design: .default))
                         TextEditor(text: viewStore.binding(get: { $0.postText }, send: ProfileAction.postTextChanged))
+                            .padding()
                             .background(Material.ultraThinMaterial)
                             .font(.system(size: 11.0, weight: .regular, design: .default))
                             .clipShape(RoundedRectangle(cornerRadius: 15.0, style: .continuous))
@@ -48,7 +50,7 @@ public struct CreatePostView: View {
                                 
                                 Text("Cancel")
                                     .font(.system(size: 13.0, weight: .regular, design: .default))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.white)
                             }
                         }
                         .padding([.horizontal], 10)
@@ -57,6 +59,7 @@ public struct CreatePostView: View {
                            
                         Button {
                             viewStore.send(ProfileAction.confirmedPressed)
+                            firestoreManager.createPost(post: viewStore.postText)
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 15.0, style: .continuous)
@@ -64,10 +67,11 @@ public struct CreatePostView: View {
                                     .shadow(color: .blue.opacity(0.2), radius: 5, x: 5, y: 5)
                                 
                                 Text("Confirm")
-                                    .font(.system(size: 13.0, weight: .semibold, design: .default))
-                                    .foregroundColor(.secondary)
+                                    .font(.system(size: 13.0, weight: .bold, design: .default))
+                                    .foregroundColor(viewStore.isValidated ? .white : .black.opacity(0.5))
                             }
                         }
+                        .disabled(!viewStore.isValidated)
                         .padding([.horizontal], 10)
                     }
                     .frame(height: 33)
@@ -88,5 +92,6 @@ public struct CreatePostView_Previews: PreviewProvider {
     )
     public static var previews: some View {
         CreatePostView(store: mockStore)
+            .environmentObject(FirestoreManager())
     }
 }

@@ -51,4 +51,18 @@ public class FirestoreManager: ObservableObject {
             }
         }
     }
+    
+    public func createPost(post: String) {
+        let dataBase = Firestore.firestore()
+        
+        let documentReference = dataBase.collection("Post").document(post)
+        
+        documentReference.setData(["name": post]) { error in
+            if let error = error {
+                print("Error Setting Data: \(error.localizedDescription)")
+            } else {
+                print("Document Successfully written")
+            }
+        }
+    }
 }

@@ -22,7 +22,7 @@ public struct ProfileState: Equatable {
     public var cancelPressed: Bool
     public var confirmedPressed: Bool
     public var isValidated: Bool {
-        return postText.isEmpty == false
+        return !postText.isEmpty
     }
     
     public init(
@@ -61,7 +61,7 @@ public enum ProfileAction: Equatable {
     case hidePostEdit
     case likeIsPressed
     case postIsPressed
-    case postTextChanged
+    case postTextChanged(String)
     case cancelPressed
     case confirmedPressed
 }
@@ -92,13 +92,14 @@ public let profileReducer = Reducer<ProfileState, ProfileAction, ProfileEnvirome
     case .postIsPressed:
         state.isPostsPressedAnimation.toggle()
         return .none
-    case .postTextChanged:
+    case let .postTextChanged(postText):
+        state.postText = postText
         return .none
     case .cancelPressed:
         state.cancelPressed = true 
         return .none
     case .confirmedPressed:
-        state.confirmedPressed = true 
+        state.confirmedPressed = true
         return .none
     }
 }
